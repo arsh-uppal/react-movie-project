@@ -21,7 +21,7 @@ const useStyles = makeStyles(() =>
       height: '8vh',
     },
     home: {
-      height: '200vh',
+      minHeight: '100vh',
       backgroundColor: 'yellow',
     },
     footer: {

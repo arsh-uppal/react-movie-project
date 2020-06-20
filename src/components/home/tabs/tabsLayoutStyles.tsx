@@ -1,6 +1,6 @@
 import {Theme} from '@material-ui/core/styles';
 
-const TabLayoutStyles = (theme: Theme) => ({
+const tabsLayoutStyles = (theme: Theme) => ({
   mainContainer: {
     height: '100%',
   },
@@ -32,4 +32,4 @@ const TabLayoutStyles = (theme: Theme) => ({
   },
 });
 
-export default TabLayoutStyles;
+export default tabsLayoutStyles;

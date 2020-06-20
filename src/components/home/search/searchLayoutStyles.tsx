@@ -8,7 +8,7 @@ const searchPanelStyles = (theme: Theme) => ({
   formContainer: {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: '4vh',
+    padding: '4vh',
   },
   searchInp: {
     marginLeft: '1vw',

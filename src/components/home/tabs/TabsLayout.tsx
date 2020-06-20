@@ -8,15 +8,15 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-
-// componenets
-import ResultCards from './ResultCards';
-
-// styles
-import TabLayoutStyles from './TabLayoutStyles';
 import {withStyles, WithStyles} from '@material-ui/core';
 
-export interface TabsLayoutProps extends WithStyles<typeof TabLayoutStyles> {
+// componenets
+import ResultCards from './cards/ResultCards';
+
+// styles
+import tabsLayoutStyles from './tabsLayoutStyles';
+
+export interface TabsLayoutProps extends WithStyles<typeof tabsLayoutStyles> {
   getMovies: (query: string) => void;
   dataStore: any;
 }
@@ -131,6 +131,7 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 </Button>
               </ButtonGroup>
             </div>
+
             {this.props.dataStore.isLoading ? (
               'loading'
             ) : (
@@ -192,4 +193,4 @@ function a11yProps(index: any) {
   };
 }
 
-export default withStyles(TabLayoutStyles)(TabsLayout);
+export default withStyles(tabsLayoutStyles)(TabsLayout);
