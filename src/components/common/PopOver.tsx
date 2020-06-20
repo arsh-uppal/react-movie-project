@@ -35,6 +35,7 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
       title,
       name,
       release_date,
+      first_air_date,
       vote_average,
       overview,
     } = this.props.cardDetails;
@@ -46,8 +47,8 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
           anchorEl={this.props.anchorEl}
           onClose={this.props.handleClose}
           anchorOrigin={{
-            vertical: 'center',
-            horizontal: 'center' as 'center',
+            vertical: 'top',
+            horizontal: 'center',
           }}
           transformOrigin={{
             vertical: 'top',
@@ -64,7 +65,7 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
                   </IconButton>
                 }
                 title={title ? title : name}
-                subheader={release_date}
+                subheader={release_date ? release_date : first_air_date}
               />
               <CardContent>
                 <Typography

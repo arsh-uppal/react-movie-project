@@ -7,7 +7,7 @@ import {IMAGE_URL} from '../../../../config/apiConfig';
 import PopOver from '../../../common/PopOver';
 
 // material-ui
-import {makeStyles, WithStyles, withStyles} from '@material-ui/core/styles';
+import {WithStyles, withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -16,6 +16,12 @@ import Button from '@material-ui/core/Button';
 
 //styles
 import resultCardLayoutStyles from './resultCardLayoutStyles';
+
+// not-found image
+/**
+ * Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+ */
+import backupImg from '../../../../images/not-found.png';
 
 export interface ResultCardLayoutProps
   extends WithStyles<typeof resultCardLayoutStyles> {
@@ -45,7 +51,7 @@ class ResultCardLayout extends React.Component<
 
   render() {
     const {classes} = this.props;
-    const {title, poster_path, name} = this.props.cardData;
+    const {title, poster_path, name, overview} = this.props.cardData;
     const open: boolean = Boolean(this.state.anchorEl);
     const id = open ? 'simple-popover' : undefined;
     return (
@@ -55,8 +61,9 @@ class ResultCardLayout extends React.Component<
             <CardMedia
               component="img"
               alt="movie or tv poster"
-              image={IMAGE_URL + poster_path}
+              image={poster_path ? IMAGE_URL + poster_path : backupImg}
               title={title}
+              style={{minHeight: 355}}
             />
           </CardActionArea>
           <CardActions>

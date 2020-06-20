@@ -13,26 +13,18 @@ import {withStyles, WithStyles} from '@material-ui/core';
 
 // componenets
 import ResultCards from './cards/ResultCards';
+import BtnGroup from '../../common/BtnGroup';
 
 // styles
 import tabsLayoutStyles from './tabsLayoutStyles';
 
 export interface TabsLayoutProps extends WithStyles<typeof tabsLayoutStyles> {
-  getMovies: (query: string) => void;
-  getTv: (query: string) => void;
+  fetchInfo: (query: string, type: any) => void;
   dataStore: any;
 }
 
 export interface TabsLayoutState {
   value: number;
-  nowPlayingMSelected: boolean;
-  popularMSelected: boolean;
-  topRatedMSelected: boolean;
-  upComingMSelected: boolean;
-  airingTodayTSelected: boolean;
-  onTheAirTSelected: boolean;
-  popularTSelected: boolean;
-  topRatedTSelected: boolean;
 }
 
 class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
@@ -40,14 +32,6 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
     super(props);
     this.state = {
       value: 0,
-      nowPlayingMSelected: true,
-      popularMSelected: false,
-      topRatedMSelected: false,
-      upComingMSelected: false,
-      airingTodayTSelected: true,
-      onTheAirTSelected: false,
-      popularTSelected: false,
-      topRatedTSelected: false,
     };
   }
 
@@ -59,34 +43,6 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
   handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     this.setState({value: newValue});
   };
-
-  handleMovieBtnClick(query: string, selectedBtn: string): void {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        nowPlayingMSelected: false,
-        popularMSelected: false,
-        topRatedMSelected: false,
-        upComingMSelected: false,
-        [selectedBtn]: true,
-      };
-    });
-    this.props.getMovies(query);
-  }
-
-  handleTvBtnClick(query: string, selectedBtn: string): void {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        airingTodayTSelected: false,
-        onTheAirTSelected: false,
-        popularTSelected: false,
-        topRatedTSelected: false,
-        [selectedBtn]: true,
-      };
-    });
-    this.props.getTv(query);
-  }
 
   // **********************************************//
   // ************** END OF ACTIONS ****************//
@@ -110,58 +66,11 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
         <div className={classes.tabPanelContainer}>
           <TabPanel value={this.state.value} index={0}>
             <div className={classes.btnGroupContainer}>
-              <ButtonGroup
-                color="primary"
-                aria-label="outlined primary button group"
-                className={classes.btnGroup}>
-                <Button
-                  onClick={() =>
-                    this.handleMovieBtnClick(
-                      'now_playing',
-                      'nowPlayingMSelected',
-                    )
-                  }
-                  className={
-                    this.state.nowPlayingMSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  Now playing
-                </Button>
-                <Button
-                  onClick={() =>
-                    this.handleMovieBtnClick('popular', 'popularMSelected')
-                  }
-                  className={
-                    this.state.popularMSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  Popular
-                </Button>
-                <Button
-                  onClick={() =>
-                    this.handleMovieBtnClick('top_rated', 'topRatedMSelected')
-                  }
-                  className={
-                    this.state.topRatedMSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  Top Rated
-                </Button>
-                <Button
-                  onClick={() =>
-                    this.handleMovieBtnClick('upcoming', 'upComingMSelected')
-                  }
-                  className={
-                    this.state.upComingMSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  Upcoming
-                </Button>
-              </ButtonGroup>
+              <BtnGroup
+                btnTypes={['now_playing', 'popular', 'top_rated', 'upcoming']}
+                contentType={'movies'}
+                fetchInfo={this.props.fetchInfo}
+              />
             </div>
 
             {this.props.dataStore.isLoading ? (
@@ -179,58 +88,16 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
           </TabPanel>
           <TabPanel value={this.state.value} index={2}>
             <div className={classes.btnGroupContainer}>
-              <ButtonGroup
-                color="primary"
-                aria-label="outlined primary button group"
-                className={classes.btnGroup}>
-                <Button
-                  onClick={() =>
-                    this.handleTvBtnClick(
-                      'airing_today',
-                      'airingTodayTSelected',
-                    )
-                  }
-                  className={
-                    this.state.airingTodayTSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  AIRING TODAY
-                </Button>
-                <Button
-                  onClick={() =>
-                    this.handleTvBtnClick('on_the_air', 'onTheAirTSelected')
-                  }
-                  className={
-                    this.state.onTheAirTSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  ON THE AIR
-                </Button>
-                <Button
-                  onClick={() =>
-                    this.handleTvBtnClick('popular', 'popularTSelected')
-                  }
-                  className={
-                    this.state.popularTSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  POPULAR
-                </Button>
-                <Button
-                  onClick={() =>
-                    this.handleTvBtnClick('top_rated', 'topRatedTSelected')
-                  }
-                  className={
-                    this.state.topRatedTSelected
-                      ? classes.btnSelected
-                      : classes.btn
-                  }>
-                  TOP RATED
-                </Button>
-              </ButtonGroup>
+              <BtnGroup
+                btnTypes={[
+                  'airing_today',
+                  'on_the_air',
+                  'popular',
+                  'top_rated',
+                ]}
+                contentType={'tv'}
+                fetchInfo={this.props.fetchInfo}
+              />
             </div>
             {this.props.dataStore.isLoading ? (
               <div className={classes.loadingSkel}>
@@ -248,6 +115,7 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
   }
 }
 
+// material-ui config
 interface TabPanelProps {
   children?: React.ReactNode;
   index: any;

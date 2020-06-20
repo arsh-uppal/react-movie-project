@@ -26,6 +26,17 @@ export interface HomeState {
   errorMsg: string;
 }
 
+const getKeyValue = <U extends keyof T, T extends object>(key: U) => (obj: T) =>
+  obj[key];
+interface ContentType {
+  movies: string;
+  tv: string;
+}
+
+const contentType: ContentType = {
+  movies: 'movie/',
+  tv: 'tv/',
+};
 class Home extends Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
     super(props);
@@ -36,7 +47,6 @@ class Home extends Component<HomeProps, HomeState> {
       snackBarDisplay: false,
       errorMsg: '',
     };
-    this.getMovies = this.getMovies.bind(this);
   }
 
   // **********************************************//
@@ -48,8 +58,8 @@ class Home extends Component<HomeProps, HomeState> {
       isLoading: true,
     });
 
-    this.getMovies('now_playing');
-    this.getTv('airing_today');
+    this.fetchInfo('now_playing', 'movies');
+    this.fetchInfo('airing_today', 'tv');
   }
 
   // **********************************************//
@@ -60,38 +70,17 @@ class Home extends Component<HomeProps, HomeState> {
   // ************ BEGINING OF  ACTIONS ************//
   // **********************************************//
 
-  getMovies = (query: string): void => {
-    getData('movie/' + query).then(
-      (result) => {
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            isLoading: false,
-            movies: result,
-          };
-        });
-      },
-      (error) => {
-        console.log('Failed: ' + error.message);
-        this.setState((prevState) => {
-          return {
-            ...prevState,
-            snackBarDisplay: true,
-            errorMsg: error.message,
-          };
-        });
-      },
+  fetchInfo = (query: string, type: any): void => {
+    const _contentType = getKeyValue<keyof ContentType, ContentType>(type)(
+      contentType,
     );
-  };
-
-  getTv = (query: string): void => {
-    getData('tv/' + query).then(
+    getData(_contentType + query).then(
       (result) => {
         this.setState((prevState) => {
           return {
             ...prevState,
             isLoading: false,
-            tv: result,
+            [type]: result,
           };
         });
       },
@@ -121,11 +110,7 @@ class Home extends Component<HomeProps, HomeState> {
         </Grid>
 
         <Grid item xs={12} className={classes.resultTabs}>
-          <TabsLayout
-            getMovies={this.getMovies}
-            getTv={this.getTv}
-            dataStore={this.state}
-          />
+          <TabsLayout fetchInfo={this.fetchInfo} dataStore={this.state} />
         </Grid>
 
         <Snackbar

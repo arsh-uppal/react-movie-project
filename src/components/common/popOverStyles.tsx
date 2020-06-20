@@ -1,5 +1,8 @@
 const popOverStyles = () => ({
-  popOverBackground: {},
+  popOverBackground: {
+    backgroundColor: 'black',
+    opacity: '0.95',
+  },
   root: {
     minWidth: 275,
   },

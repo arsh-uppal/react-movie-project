@@ -24,7 +24,7 @@ class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
   loadCard(cardsData: any) {
     return cardsData.map((cardData: any) => {
       return (
-        <span style={{padding: 8}}>
+        <span style={{padding: 8}} key={cardData.id}>
           <ResultCardLayout cardData={cardData} />
         </span>
       );
