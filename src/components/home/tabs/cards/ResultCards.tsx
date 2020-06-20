@@ -4,7 +4,7 @@ import React from 'react';
 import {WithStyles, withStyles} from '@material-ui/core';
 
 // components
-import ResultCardLayout from './ResulatCardLayout';
+import ResultCardLayout from './ResultCardLayout';
 
 // styles
 import resultCardsStyles from './resultCardsStyles';

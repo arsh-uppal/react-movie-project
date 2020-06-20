@@ -51,7 +51,7 @@ class ResultCardLayout extends React.Component<
 
   render() {
     const {classes} = this.props;
-    const {title, poster_path, name, overview} = this.props.cardData;
+    const {title, poster_path, name} = this.props.cardData;
     const open: boolean = Boolean(this.state.anchorEl);
     const id = open ? 'simple-popover' : undefined;
     return (

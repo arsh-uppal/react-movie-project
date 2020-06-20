@@ -11,7 +11,8 @@ import btnGroupStyles from './btnGroupStyles';
 export interface BtnGroupProps extends WithStyles<typeof btnGroupStyles> {
   btnTypes: Array<string>;
   contentType: string;
-  fetchInfo: (query: string, type: any) => void;
+  btnSelected: string;
+  handleBtnClick: (query: string, type: any) => void;
 }
 
 export interface BtnGroupState {}
@@ -22,18 +23,6 @@ class BtnGroup extends React.Component<BtnGroupProps, BtnGroupState> {
     this.state = {};
   }
 
-  // **********************************************//
-  // ************ BEGINING OF  ACTIONS ************//
-  // **********************************************//
-
-  handleBtnClick = (btn: string, contentType: string) => {
-    this.props.fetchInfo(btn, contentType);
-  };
-
-  // **********************************************//
-  // ************** END OF ACTIONS ****************//
-  // **********************************************//
-
   render() {
     const {classes} = this.props;
     return (
@@ -41,10 +30,16 @@ class BtnGroup extends React.Component<BtnGroupProps, BtnGroupState> {
         color="primary"
         aria-label="outlined primary button group"
         className={classes.btnGroup}>
-        {this.props.btnTypes.map((btn) => {
+        {this.props.btnTypes.map((btn, index) => {
           return (
             <Button
-              onClick={() => this.handleBtnClick(btn, this.props.contentType)}>
+              key={index}
+              onClick={() =>
+                this.props.handleBtnClick(btn, this.props.contentType)
+              }
+              className={
+                this.props.btnSelected === btn ? classes.btnSelected : ''
+              }>
               {btn}
             </Button>
           );

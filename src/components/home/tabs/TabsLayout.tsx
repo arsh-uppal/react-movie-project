@@ -6,8 +6,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {withStyles, WithStyles} from '@material-ui/core';
 
@@ -25,6 +23,8 @@ export interface TabsLayoutProps extends WithStyles<typeof tabsLayoutStyles> {
 
 export interface TabsLayoutState {
   value: number;
+  btnSelectedMovies: string;
+  btnSelectedTv: string;
 }
 
 class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
@@ -32,6 +32,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
     super(props);
     this.state = {
       value: 0,
+      btnSelectedMovies: 'now_playing',
+      btnSelectedTv: 'airing_today',
     };
   }
 
@@ -41,7 +43,32 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
 
   // tabs
   handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    this.setState({value: newValue});
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        value: newValue,
+      };
+    });
+  };
+
+  // handles click on any button of the button group
+  handleBtnClick = (btn: string, contentType: string) => {
+    this.props.fetchInfo(btn, contentType);
+    if (contentType === 'movies') {
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          btnSelectedMovies: btn,
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          btnSelectedTv: btn,
+        };
+      });
+    }
   };
 
   // **********************************************//
@@ -69,7 +96,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
               <BtnGroup
                 btnTypes={['now_playing', 'popular', 'top_rated', 'upcoming']}
                 contentType={'movies'}
-                fetchInfo={this.props.fetchInfo}
+                handleBtnClick={this.handleBtnClick}
+                btnSelected={this.state.btnSelectedMovies}
               />
             </div>
 
@@ -96,7 +124,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                   'top_rated',
                 ]}
                 contentType={'tv'}
-                fetchInfo={this.props.fetchInfo}
+                handleBtnClick={this.handleBtnClick}
+                btnSelected={this.state.btnSelectedTv}
               />
             </div>
             {this.props.dataStore.isLoading ? (
