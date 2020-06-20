@@ -7,9 +7,13 @@ const tabsLayoutStyles = (theme: Theme) => ({
   tabsBar: {
     backgroundColor: theme.palette.background.paper,
     color: 'black',
-    width: '60%',
+    width: '50vw',
     margin: 'auto',
     alignItems: 'center',
+    fontSize: '2vh',
+    [theme.breakpoints.down('sm')]: {
+      width: '80%',
+    },
     [theme.breakpoints.down('xs')]: {
       width: '90%',
     },
@@ -29,6 +33,24 @@ const tabsLayoutStyles = (theme: Theme) => ({
   btnSelected: {
     backgroundColor: 'blue',
     color: 'white',
+    fontSize: '2vh',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.5vh',
+    },
+  },
+  btn: {
+    fontSize: '2vh',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.5vh',
+    },
+  },
+  loadingSkel: {
+    width: 210,
+    paddingTop: '8vw',
+    margin: 'auto',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: '20vw',
+    },
   },
 });
 

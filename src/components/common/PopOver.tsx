@@ -33,6 +33,7 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
     const {classes} = this.props;
     const {
       title,
+      name,
       release_date,
       vote_average,
       overview,
@@ -62,7 +63,7 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
                     <HighlightOffTwoToneIcon />
                   </IconButton>
                 }
-                title={title}
+                title={title ? title : name}
                 subheader={release_date}
               />
               <CardContent>

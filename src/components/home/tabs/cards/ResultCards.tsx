@@ -37,7 +37,7 @@ class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
 
     return (
       <div className={classes.root}>
-        {cardsData.length > 0 ? this.loadCard(cardsData) : 'no data'}
+        {cardsData.length > 0 ? this.loadCard(cardsData) : 'NO DATA'}
       </div>
     );
   }

@@ -49,12 +49,8 @@ class Home extends Component<HomeProps, HomeState> {
     });
 
     this.getMovies('now_playing');
-    //this.getTv('airing_today');
+    this.getTv('airing_today');
   }
-
-  // componentDidUpdate() {
-  //   console.log(this.state);
-  // }
 
   // **********************************************//
   // ************* END OF EFFECTS *****************//
@@ -88,6 +84,30 @@ class Home extends Component<HomeProps, HomeState> {
     );
   };
 
+  getTv = (query: string): void => {
+    getData('tv/' + query).then(
+      (result) => {
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            isLoading: false,
+            tv: result,
+          };
+        });
+      },
+      (error) => {
+        console.log('Failed: ' + error.message);
+        this.setState((prevState) => {
+          return {
+            ...prevState,
+            snackBarDisplay: true,
+            errorMsg: error.message,
+          };
+        });
+      },
+    );
+  };
+
   // **********************************************//
   // ************** END OF ACTIONS ****************//
   // **********************************************//
@@ -101,7 +121,11 @@ class Home extends Component<HomeProps, HomeState> {
         </Grid>
 
         <Grid item xs={12} className={classes.resultTabs}>
-          <TabsLayout getMovies={this.getMovies} dataStore={this.state} />
+          <TabsLayout
+            getMovies={this.getMovies}
+            getTv={this.getTv}
+            dataStore={this.state}
+          />
         </Grid>
 
         <Snackbar

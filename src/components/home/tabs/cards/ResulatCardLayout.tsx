@@ -45,7 +45,7 @@ class ResultCardLayout extends React.Component<
 
   render() {
     const {classes} = this.props;
-    const {title, poster_path} = this.props.cardData;
+    const {title, poster_path, name} = this.props.cardData;
     const open: boolean = Boolean(this.state.anchorEl);
     const id = open ? 'simple-popover' : undefined;
     return (
@@ -54,7 +54,7 @@ class ResultCardLayout extends React.Component<
           <CardActionArea onClick={this.handleClickPopOver}>
             <CardMedia
               component="img"
-              alt="Contemplative Reptile"
+              alt="movie or tv poster"
               image={IMAGE_URL + poster_path}
               title={title}
             />
@@ -65,7 +65,7 @@ class ResultCardLayout extends React.Component<
               color="primary"
               className={classes.title}
               onClick={this.handleClickPopOver}>
-              <span className={classes.titleSpan}>{title}</span>
+              <span className={classes.titleSpan}>{title ? title : name}</span>
             </Button>
           </CardActions>
         </Card>
