@@ -1,16 +1,31 @@
 import React from 'react';
 
 // material-ui
-import Typography from '@material-ui/core/Typography';
+import {Theme} from '@material-ui/core/styles';
 import {createStyles, makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() =>
+// official icons, credits
+/**
+ * The following import may show warning in VS code. However, it works.
+ */
+import movieDBlogo from '../../images/moviedb-logo.svg';
+import reactlogo from '../../images/react.png';
+import tslogo from '../../images/typescript.svg';
+
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      height: '8vh',
+      height: '10vh',
+      minHeight: 55,
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       backgroundColor: '#020916',
       backgroundImage: 'linear-gradient(to right, #0B2148, #020916 )',
+      [theme.breakpoints.down('xs')]: {
+        height: '8vh',
+      },
     },
     title: {
       flexGrow: 1,
@@ -21,6 +36,18 @@ const useStyles = makeStyles(() =>
       marginTop: '2.8vh',
       marginLeft: '10px',
     },
+    divLeftStyle: {
+      float: 'left',
+      padding: '1.2vh 25px',
+    },
+    divRightStyle: {
+      color: 'white',
+      float: 'left',
+      padding: '2.2vh 25px',
+    },
+    divRightItems: {
+      marginRight: 20,
+    },
   }),
 );
 
@@ -29,7 +56,26 @@ export default function Footer() {
 
   return (
     <div className={classes.root}>
-      <Typography className={classes.title}>All rights reserved</Typography>
+      {/* <Typography className={classes.title}>All rights reserved</Typography> */}
+      <div className={classes.divLeftStyle}>
+        <img src={movieDBlogo} alt="search icon" width="50" height="50" />
+      </div>
+      <div className={classes.divRightStyle}>
+        <img
+          className={classes.divRightItems}
+          src={reactlogo}
+          alt="search icon"
+          width="30"
+          height="30"
+        />
+        <img
+          className={classes.divRightItems}
+          src={tslogo}
+          alt="search icon"
+          width="30"
+          height="30"
+        />
+      </div>
     </div>
   );
 }

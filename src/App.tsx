@@ -8,6 +8,7 @@ import React from 'react';
 
 // material-ui
 import {makeStyles, createStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 // components
@@ -15,16 +16,19 @@ import NavBar from './components/navBar/NavBar';
 import Home from './components/home/Home';
 import Footer from './components/footer/Footer';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     navBar: {
       height: '8vh',
     },
     home: {
-      minHeight: '100vh',
+      minHeight: '92vh',
     },
     footer: {
-      height: '8vh',
+      height: '10vh',
+      [theme.breakpoints.down('xs')]: {
+        height: '8vh',
+      },
     },
   }),
 );

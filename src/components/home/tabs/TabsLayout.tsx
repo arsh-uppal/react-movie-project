@@ -179,7 +179,7 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 {this.props.dataStore.searchMsg}
                 <img
                   src={searchImg}
-                  alt="searcj icon"
+                  alt="search icon"
                   width="100"
                   height="100"
                   className={classes.searchImg}
