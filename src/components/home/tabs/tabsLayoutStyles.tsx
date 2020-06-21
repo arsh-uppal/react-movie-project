@@ -15,7 +15,7 @@ const tabsLayoutStyles = (theme: Theme) => ({
       width: '80%',
     },
     [theme.breakpoints.down('xs')]: {
-      width: '90%',
+      width: '80%',
     },
   },
   tabPanelContainer: {
@@ -61,6 +61,8 @@ const tabsLayoutStyles = (theme: Theme) => ({
       paddingTop: '20vw',
     },
   },
+  searchImg: {marginTop: 20},
+
   paginationContainer: {
     margin: 'auto',
     display: 'table',
@@ -69,12 +71,18 @@ const tabsLayoutStyles = (theme: Theme) => ({
     width: '100%%',
     margin: 'auto',
     textAlign: 'center' as 'center',
-    '& ul': {'& li:nth-child(n+2):nth-child(-n+3)': {display: 'none'}},
+    '& ul': {
+      '& li:nth-child(n+2):nth-child(-n+3)': {display: 'none'},
+      '& li': {'& button': {backgroundColor: '#f50057'}},
+    },
   },
   paginationForSearch: {
     width: '100%%',
     margin: 'auto',
     textAlign: 'center' as 'center',
+    '& ul': {
+      '& li': {'& button': {backgroundColor: '#f50057'}},
+    },
   },
 });
 

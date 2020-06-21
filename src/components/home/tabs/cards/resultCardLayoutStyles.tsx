@@ -5,8 +5,8 @@ const resultCardLayoutStyles = (theme: Theme) => ({
     maxWidth: 240,
     width: 240,
     [theme.breakpoints.down('xs')]: {
-      maxWidth: 340,
-      width: 340,
+      maxWidth: 350,
+      width: 350,
     },
   },
   media: {

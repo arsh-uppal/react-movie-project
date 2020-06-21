@@ -38,7 +38,9 @@ class BtnGroup extends React.Component<BtnGroupProps, BtnGroupState> {
                 this.props.handleBtnClick(btn, this.props.contentType)
               }
               className={
-                this.props.btnSelected === btn ? classes.btnSelected : ''
+                this.props.btnSelected === btn
+                  ? classes.btnSelected
+                  : classes.btn
               }>
               {btn}
             </Button>

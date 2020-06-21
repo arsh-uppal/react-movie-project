@@ -9,7 +9,8 @@ const useStyles = makeStyles(() =>
     root: {
       flexGrow: 1,
       height: '8vh',
-      backgroundColor: 'black',
+      backgroundColor: '#020916',
+      backgroundImage: 'linear-gradient(to right, #0B2148, #020916 )',
     },
     title: {
       flexGrow: 1,

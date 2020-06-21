@@ -3,23 +3,29 @@ import {Theme} from '@material-ui/core/styles';
 const btnGroupStyles = (theme: Theme) => ({
   btnGroup: {
     margin: 'auto',
+    fontSize: '2vh',
     backgroundColor: theme.palette.background.paper,
   },
   btnSelected: {
-    backgroundColor: 'blue',
+    backgroundColor: '#f50057',
     color: 'white',
-    fontSize: '2vh',
+    fontWeight: 'bold' as 'bold',
     [theme.breakpoints.down('xs')]: {
-      fontSize: '1.5vh',
+      fontSize: '2.5vh',
+      fontWeight: 'bolder' as 'bolder',
     },
     '&:hover': {
-      background: 'purple',
+      backgroundColor: '#eb2a6f',
+      color: 'white',
     },
   },
   btn: {
     fontSize: '2vh',
+    fontWeight: 'bold' as 'bold',
+    color: '#f50057',
     [theme.breakpoints.down('xs')]: {
-      fontSize: '1.5vh',
+      fontSize: '2.5vh',
+      fontWeight: 'bolder' as 'bolder',
     },
   },
 });

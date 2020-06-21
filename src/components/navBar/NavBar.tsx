@@ -12,13 +12,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBar: {
       height: '8vh',
+      backgroundColor: '#020916',
+      backgroundImage: 'linear-gradient(to right, #0B2148, #020916 )',
     },
     title: {
       flexGrow: 1,
       fontSize: '2.8vh',
-      fontWeight: 'bold',
+      fontWeight: 'normal',
       marginTop: '2vh',
-      marginLeft: '10px',
+      marginLeft: '20px',
     },
   }),
 );

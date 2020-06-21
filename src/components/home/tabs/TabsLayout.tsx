@@ -79,7 +79,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
   };
 
   /**
-   * could not change the default on change signature for pagination
+   * Could not change the default on-change signature for pagination, that is why
+   * had to make different functions!
    */
   handleMoviesPageChange = (event: object, page: number) => {
     this.props.fetchInfo(
@@ -123,6 +124,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
         </AppBar>
         <div></div>
         <div className={classes.tabPanelContainer}>
+          {/* Movies section */}
+
           <TabPanel value={this.props.dataStore.tabNumber} index={0}>
             <div className={classes.btnGroupContainer}>
               <BtnGroup
@@ -155,6 +158,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
             )}
           </TabPanel>
 
+          {/* search section */}
+
           <TabPanel value={this.props.dataStore.tabNumber} index={1}>
             {this.props.dataStore.isLoading ? (
               <div className={classes.loadingSkel}>
@@ -169,6 +174,7 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                   alt="searcj icon"
                   width="100"
                   height="100"
+                  className={classes.searchImg}
                 />
               </div>
             ) : (
@@ -186,6 +192,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
               </>
             )}
           </TabPanel>
+
+          {/* TV section */}
 
           <TabPanel value={this.props.dataStore.tabNumber} index={2}>
             <div className={classes.btnGroupContainer}>

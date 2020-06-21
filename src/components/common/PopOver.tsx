@@ -37,6 +37,7 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
       release_date,
       first_air_date,
       vote_average,
+      vote_count,
       overview,
     } = this.props.cardDetails;
     return (
@@ -69,7 +70,7 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
               />
               <CardContent>
                 <Typography
-                  className={classes.title}
+                  className={classes.rating}
                   color="textSecondary"
                   gutterBottom>
                   <Rating
@@ -78,6 +79,9 @@ class PopOver extends React.Component<PopOverProps, PopOverState> {
                     max={10}
                     disabled
                   />
+                  <span style={{marginLeft: 4}}>
+                    ({vote_count ? vote_count : 0})
+                  </span>
                 </Typography>
                 <Typography
                   className={classes.title}
