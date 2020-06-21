@@ -4,26 +4,40 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      padding: 0,
+      margin: 0,
     },
     appBar: {
       height: '8vh',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       backgroundColor: '#020916',
       backgroundImage: 'linear-gradient(to right, #0B2148, #020916 )',
     },
     title: {
       flexGrow: 1,
-      fontSize: '2.7vh',
+      fontSize: '2.8vh',
       fontWeight: 'bolder',
-      marginTop: '2vh',
-      marginLeft: '20px',
+      marginLeft: 20,
+      marginTop: '1.7vh',
       [theme.breakpoints.down('sm')]: {
-        fontSize: '2.5vh',
+        fontSize: '2.2vh',
+        marginTop: '2.2vh',
       },
+    },
+    btn: {
+      width: '10%',
+      fontWeight: 'bolder',
+      marginTop: '1vh',
+      [theme.breakpoints.down('sm')]: {marginTop: '0.2vh'},
     },
   }),
 );
@@ -37,6 +51,14 @@ export default function NavBar() {
         <Typography component={'span'} className={classes.title}>
           Movies App
         </Typography>
+        <Button color="inherit" className={classes.btn}>
+          <a
+            href="https://github.com/Singh-Arshdeep"
+            target="_blank"
+            style={{color: 'inherit', margin: 0, padding: 0}}>
+            <AccountCircleSharpIcon fontSize="large" />
+          </a>
+        </Button>
       </AppBar>
     </div>
   );
