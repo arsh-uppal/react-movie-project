@@ -63,7 +63,7 @@ class ResultCardLayout extends React.Component<
               alt="movie or tv poster"
               image={poster_path ? IMAGE_URL + poster_path : backupImg}
               title={title}
-              style={{minHeight: 355}}
+              style={{height: 355}}
             />
           </CardActionArea>
           <CardActions>

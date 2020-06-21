@@ -22,20 +22,24 @@ export interface HomeState {
   isLoading: boolean;
   movies: Array<any>;
   tv: Array<any>;
+  search: Array<string>;
   snackBarDisplay: boolean;
+  tabNumber: number;
   errorMsg: string;
 }
 
 const getKeyValue = <U extends keyof T, T extends object>(key: U) => (obj: T) =>
   obj[key];
-interface ContentType {
+interface ContentCategories {
   movies: string;
   tv: string;
+  search: string;
 }
 
-const contentType: ContentType = {
+const contentCategories: ContentCategories = {
   movies: 'movie/',
   tv: 'tv/',
+  search: 'search/',
 };
 class Home extends Component<HomeProps, HomeState> {
   constructor(props: HomeProps) {
@@ -44,13 +48,15 @@ class Home extends Component<HomeProps, HomeState> {
       isLoading: false,
       movies: [],
       tv: [],
+      search: [],
       snackBarDisplay: false,
+      tabNumber: 0,
       errorMsg: '',
     };
   }
 
   // **********************************************//
-  // ************ BEGINING OF EFFECTS ******//
+  // ************ BEGINING OF EFFECTS *************//
   // **********************************************//
 
   componentDidMount() {
@@ -70,17 +76,23 @@ class Home extends Component<HomeProps, HomeState> {
   // ************ BEGINING OF  ACTIONS ************//
   // **********************************************//
 
-  fetchInfo = (query: string, type: any): void => {
-    const _contentType = getKeyValue<keyof ContentType, ContentType>(type)(
-      contentType,
-    );
-    getData(_contentType + query).then(
+  fetchInfo = (
+    contentFor: string,
+    contentCategory: any,
+    searchQuery: string = '',
+  ): void => {
+    const _contentCategory = getKeyValue<
+      keyof ContentCategories,
+      ContentCategories
+    >(contentCategory)(contentCategories);
+
+    getData(_contentCategory + contentFor, searchQuery).then(
       (result) => {
         this.setState((prevState) => {
           return {
             ...prevState,
             isLoading: false,
-            [type]: result,
+            [contentCategory]: result,
           };
         });
       },
@@ -97,6 +109,16 @@ class Home extends Component<HomeProps, HomeState> {
     );
   };
 
+  //handleTabChange
+  handleTabChange = (event: any, newValue: number) => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        tabNumber: newValue,
+      };
+    });
+  };
+
   // **********************************************//
   // ************** END OF ACTIONS ****************//
   // **********************************************//
@@ -106,11 +128,18 @@ class Home extends Component<HomeProps, HomeState> {
     return (
       <Grid container spacing={0} className={classes.root}>
         <Grid item xs={12} className={classes.searchPanel}>
-          <SearchLayout />
+          <SearchLayout
+            fetchInfo={this.fetchInfo}
+            handleTabChange={this.handleTabChange}
+          />
         </Grid>
 
         <Grid item xs={12} className={classes.resultTabs}>
-          <TabsLayout fetchInfo={this.fetchInfo} dataStore={this.state} />
+          <TabsLayout
+            fetchInfo={this.fetchInfo}
+            dataStore={this.state}
+            handleTabChange={this.handleTabChange}
+          />
         </Grid>
 
         <Snackbar

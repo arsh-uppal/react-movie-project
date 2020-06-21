@@ -29,7 +29,9 @@ export default function NavBar() {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
-        <Typography className={classes.title}>Movies App</Typography>
+        <Typography component={'span'} className={classes.title}>
+          Movies App
+        </Typography>
       </AppBar>
     </div>
   );

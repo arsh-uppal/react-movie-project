@@ -6,10 +6,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Skeleton from '@material-ui/lab/Skeleton';
 import {withStyles, WithStyles} from '@material-ui/core';
 
 // componenets
+import LoadingSkelton from '../../common/LoadingSkelton';
 import ResultCards from './cards/ResultCards';
 import BtnGroup from '../../common/BtnGroup';
 
@@ -17,12 +17,12 @@ import BtnGroup from '../../common/BtnGroup';
 import tabsLayoutStyles from './tabsLayoutStyles';
 
 export interface TabsLayoutProps extends WithStyles<typeof tabsLayoutStyles> {
-  fetchInfo: (query: string, type: any) => void;
+  fetchInfo: (contentFor: string, contentCategory: any) => void;
+  handleTabChange: (event: React.ChangeEvent<{}>, newValue: number) => void;
   dataStore: any;
 }
 
 export interface TabsLayoutState {
-  value: number;
   btnSelectedMovies: string;
   btnSelectedTv: string;
 }
@@ -31,7 +31,6 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
   constructor(props: TabsLayoutProps) {
     super(props);
     this.state = {
-      value: 0,
       btnSelectedMovies: 'now_playing',
       btnSelectedTv: 'airing_today',
     };
@@ -41,17 +40,11 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
   // ************ BEGINING OF  ACTIONS ************//
   // **********************************************//
 
-  // tabs
-  handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        value: newValue,
-      };
-    });
-  };
-
-  // handles click on any button of the button group
+  /**
+   * @param btn - the btn which we want to highlight
+   * @param contentType
+   * handles click on any button of the button group
+   */
   handleBtnClick = (btn: string, contentType: string) => {
     this.props.fetchInfo(btn, contentType);
     if (contentType === 'movies') {
@@ -81,8 +74,8 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
       <div className={classes.mainContainer}>
         <AppBar position="static" className={classes.tabsBar}>
           <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={this.props.dataStore.tabNumber}
+            onChange={this.props.handleTabChange}
             aria-label="Tabs">
             <Tab label="MOVIES" {...a11yProps(0)} />
             <Tab label="SEARCH" {...a11yProps(1)} />
@@ -91,7 +84,7 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
         </AppBar>
         <div></div>
         <div className={classes.tabPanelContainer}>
-          <TabPanel value={this.state.value} index={0}>
+          <TabPanel value={this.props.dataStore.tabNumber} index={0}>
             <div className={classes.btnGroupContainer}>
               <BtnGroup
                 btnTypes={['now_playing', 'popular', 'top_rated', 'upcoming']}
@@ -100,21 +93,26 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 btnSelected={this.state.btnSelectedMovies}
               />
             </div>
-
             {this.props.dataStore.isLoading ? (
               <div className={classes.loadingSkel}>
-                <Skeleton variant="text" width={210} height={40} />
-                <Skeleton variant="circle" width={40} height={40} />
-                <Skeleton variant="rect" width={210} height={118} />
+                <LoadingSkelton />
               </div>
             ) : (
               <ResultCards cardsData={this.props.dataStore.movies} />
             )}
           </TabPanel>
-          <TabPanel value={this.state.value} index={1}>
-            b
+
+          <TabPanel value={this.props.dataStore.tabNumber} index={1}>
+            {this.props.dataStore.isLoading ? (
+              <div className={classes.loadingSkel}>
+                <LoadingSkelton />
+              </div>
+            ) : (
+              <ResultCards cardsData={this.props.dataStore.search} />
+            )}
           </TabPanel>
-          <TabPanel value={this.state.value} index={2}>
+
+          <TabPanel value={this.props.dataStore.tabNumber} index={2}>
             <div className={classes.btnGroupContainer}>
               <BtnGroup
                 btnTypes={[
@@ -130,9 +128,7 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
             </div>
             {this.props.dataStore.isLoading ? (
               <div className={classes.loadingSkel}>
-                <Skeleton variant="text" width={210} height={40} />
-                <Skeleton variant="circle" width={40} height={40} />
-                <Skeleton variant="rect" width={210} height={118} />
+                <LoadingSkelton />
               </div>
             ) : (
               <ResultCards cardsData={this.props.dataStore.tv} />
@@ -163,7 +159,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}>
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>

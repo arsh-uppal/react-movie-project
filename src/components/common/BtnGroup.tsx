@@ -12,7 +12,7 @@ export interface BtnGroupProps extends WithStyles<typeof btnGroupStyles> {
   btnTypes: Array<string>;
   contentType: string;
   btnSelected: string;
-  handleBtnClick: (query: string, type: any) => void;
+  handleBtnClick: (contentFor: string, contentCategory: any) => void;
 }
 
 export interface BtnGroupState {}
