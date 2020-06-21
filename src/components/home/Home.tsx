@@ -23,10 +23,15 @@ export interface HomeState {
   movies: Array<any>;
   tv: Array<any>;
   search: Array<string>;
-  snackBarDisplay: boolean;
+  moviesPageCount: number;
+  tvPageCount: number;
+  searchPageCount: number;
   tabNumber: number;
   searchMsg: string;
+  searchQuery: string;
+  searchFilter: string;
   errorMsg: string;
+  snackBarDisplay: boolean;
 }
 
 const getKeyValue = <U extends keyof T, T extends object>(key: U) => (obj: T) =>
@@ -50,10 +55,15 @@ class Home extends Component<HomeProps, HomeState> {
       movies: [],
       tv: [],
       search: [],
-      snackBarDisplay: false,
+      moviesPageCount: 1,
+      tvPageCount: 1,
+      searchPageCount: 1,
       tabNumber: 0,
       searchMsg: 'Please enter a search query',
+      searchQuery: '',
+      searchFilter: '',
       errorMsg: '',
+      snackBarDisplay: false,
     };
   }
 
@@ -82,19 +92,32 @@ class Home extends Component<HomeProps, HomeState> {
     contentFor: string,
     contentCategory: any,
     searchQuery: string = '',
+    pageNum: number = 1,
   ): void => {
     const _contentCategory = getKeyValue<
       keyof ContentCategories,
       ContentCategories
     >(contentCategory)(contentCategories);
 
-    getData(_contentCategory + contentFor, searchQuery).then(
-      (result) => {
+    //fix for pagination on search page
+    if (contentCategory === 'search') {
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          searchQuery: searchQuery,
+          searchFilter: contentFor,
+        };
+      });
+    }
+    getData(_contentCategory + contentFor, searchQuery, pageNum).then(
+      (data) => {
         this.setState((prevState) => {
+          let pageCountFor = contentCategory + 'PageCount';
           return {
             ...prevState,
             isLoading: false,
-            [contentCategory]: result,
+            [contentCategory]: data.results,
+            [pageCountFor]: data.total_pages,
           };
         });
       },
@@ -129,6 +152,7 @@ class Home extends Component<HomeProps, HomeState> {
       };
     });
   };
+
   // **********************************************//
   // ************** END OF ACTIONS ****************//
   // **********************************************//

@@ -61,6 +61,21 @@ const tabsLayoutStyles = (theme: Theme) => ({
       paddingTop: '20vw',
     },
   },
+  paginationContainer: {
+    margin: 'auto',
+    display: 'table',
+  },
+  pagination: {
+    width: '100%%',
+    margin: 'auto',
+    textAlign: 'center' as 'center',
+    '& ul': {'& li:nth-child(n+2):nth-child(-n+3)': {display: 'none'}},
+  },
+  paginationForSearch: {
+    width: '100%%',
+    margin: 'auto',
+    textAlign: 'center' as 'center',
+  },
 });
 
 export default tabsLayoutStyles;

@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import {withStyles, WithStyles} from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
 
 // componenets
 import LoadingSkelton from '../../common/LoadingSkelton';
@@ -25,7 +26,12 @@ import tabsLayoutStyles from './tabsLayoutStyles';
 import searchImg from '../../../images/search.png';
 
 export interface TabsLayoutProps extends WithStyles<typeof tabsLayoutStyles> {
-  fetchInfo: (contentFor: string, contentCategory: any) => void;
+  fetchInfo: (
+    contentFor: string,
+    contentCategory: any,
+    searchQuery?: string,
+    pageNum?: number,
+  ) => void;
   handleTabChange: (event: React.ChangeEvent<{}>, newValue: number) => void;
   dataStore: any;
 }
@@ -53,23 +59,48 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
    * @param contentType
    * handles click on any button of the button group
    */
-  handleBtnClick = (btn: string, contentType: string) => {
-    this.props.fetchInfo(btn, contentType);
-    if (contentType === 'movies') {
+  handleBtnClick = (contentFor: string, contentCategory: string) => {
+    this.props.fetchInfo(contentFor, contentCategory);
+    if (contentCategory === 'movies') {
       this.setState((prevState) => {
         return {
           ...prevState,
-          btnSelectedMovies: btn,
+          btnSelectedMovies: contentFor,
         };
       });
     } else {
       this.setState((prevState) => {
         return {
           ...prevState,
-          btnSelectedTv: btn,
+          btnSelectedTv: contentFor,
         };
       });
     }
+  };
+
+  /**
+   * could not change the default on change signature for pagination
+   */
+  handleMoviesPageChange = (event: object, page: number) => {
+    this.props.fetchInfo(
+      this.state.btnSelectedMovies,
+      'movies',
+      undefined,
+      page,
+    );
+  };
+
+  handleTvPageChange = (event: object, page: number) => {
+    this.props.fetchInfo(this.state.btnSelectedTv, 'tv', undefined, page);
+  };
+
+  handleSearchPageChange = (event: object, page: number) => {
+    this.props.fetchInfo(
+      this.props.dataStore.searchFilter,
+      'search',
+      this.props.dataStore.searchQuery,
+      page,
+    );
   };
 
   // **********************************************//
@@ -106,7 +137,21 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 <LoadingSkelton />
               </div>
             ) : (
-              <ResultCards cardsData={this.props.dataStore.movies} />
+              <>
+                <ResultCards cardsData={this.props.dataStore.movies} />
+                <div className={classes.paginationContainer}>
+                  <Pagination
+                    variant="outlined"
+                    count={this.props.dataStore.moviesPageCount}
+                    color="primary"
+                    onChange={this.handleMoviesPageChange}
+                    className={classes.pagination}
+                    boundaryCount={0}
+                    siblingCount={0}
+                    size="large"
+                  />
+                </div>
+              </>
             )}
           </TabPanel>
 
@@ -121,13 +166,24 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 {this.props.dataStore.searchMsg}
                 <img
                   src={searchImg}
-                  alt="Girl in a jacket"
+                  alt="searcj icon"
                   width="100"
                   height="100"
                 />
               </div>
             ) : (
-              <ResultCards cardsData={this.props.dataStore.search} />
+              <>
+                <ResultCards cardsData={this.props.dataStore.search} />
+                <div className={classes.paginationContainer}>
+                  <Pagination
+                    variant="outlined"
+                    count={this.props.dataStore.searchPageCount}
+                    color="primary"
+                    onChange={this.handleSearchPageChange}
+                    className={classes.paginationForSearch}
+                  />
+                </div>
+              </>
             )}
           </TabPanel>
 
@@ -150,7 +206,21 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 <LoadingSkelton />
               </div>
             ) : (
-              <ResultCards cardsData={this.props.dataStore.tv} />
+              <>
+                <ResultCards cardsData={this.props.dataStore.tv} />
+                <div className={classes.paginationContainer}>
+                  <Pagination
+                    variant="outlined"
+                    count={this.props.dataStore.tvPageCount}
+                    color="primary"
+                    onChange={this.handleTvPageChange}
+                    className={classes.pagination}
+                    boundaryCount={0}
+                    siblingCount={0}
+                    size="large"
+                  />
+                </div>
+              </>
             )}
           </TabPanel>
         </div>

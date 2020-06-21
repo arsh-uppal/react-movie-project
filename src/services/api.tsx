@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-import {API_KEY, BASE_URL, NO_OF_PAGES} from '../config/apiConfig';
+import {API_KEY, BASE_URL} from '../config/apiConfig';
 
-export const getData = async (contentFor: string, searchQuery: string) => {
+export const getData = async (
+  contentFor: string,
+  searchQuery: string,
+  pageNum: number = 1,
+) => {
   let _param: any = {
     api_key: API_KEY,
-    page: NO_OF_PAGES,
+    page: pageNum,
   };
 
   if (searchQuery.length > 0) {
@@ -17,7 +21,7 @@ export const getData = async (contentFor: string, searchQuery: string) => {
     const response = await axios.get(url + contentFor, {
       params: _param,
     });
-    const data = response.data.results;
+    const data = response.data;
     return data;
   } catch (error) {
     throw error;

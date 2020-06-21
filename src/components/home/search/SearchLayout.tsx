@@ -27,13 +27,13 @@ export interface SearchPanelProps extends WithStyles<typeof searchPanelStyles> {
 
 export interface SearchPanelState {
   searchQuery?: string;
-  searchType?: string;
+  contentFor?: string;
 }
 
 class SearchLayout extends React.Component<SearchPanelProps, SearchPanelState> {
   constructor(props: SearchPanelProps) {
     super(props);
-    this.state = {searchQuery: '', searchType: SEARCH_FILTER_OPTIONS[0]};
+    this.state = {searchQuery: '', contentFor: SEARCH_FILTER_OPTIONS[0]};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -63,7 +63,7 @@ class SearchLayout extends React.Component<SearchPanelProps, SearchPanelState> {
     event.preventDefault();
     this.changeToSearchTab();
     this.props.fetchInfo(
-      this.state.searchType!,
+      this.state.contentFor!,
       'search',
       this.state.searchQuery!,
     );
@@ -95,12 +95,12 @@ class SearchLayout extends React.Component<SearchPanelProps, SearchPanelState> {
           />
 
           <Select
-            value={this.state.searchType}
+            value={this.state.contentFor}
             displayEmpty
             className={classes.searchTyp}
             inputProps={{'aria-label': 'Without label'}}
             onChange={this.handleChange}
-            name="searchType">
+            name="contentFor">
             {SEARCH_FILTER_OPTIONS.map((element, index) => {
               return (
                 <MenuItem key={index} value={element}>
