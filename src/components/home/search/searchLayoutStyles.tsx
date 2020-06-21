@@ -8,34 +8,41 @@ const searchPanelStyles = (theme: Theme) => ({
   formContainer: {
     display: 'flex',
     justifyContent: 'center',
-    padding: '4vh',
+    padding: '5vh',
+    paddingLeft: '2vh',
+    paddingRight: '2vh',
   },
   searchInp: {
-    marginLeft: '1vw',
+    marginLeft: '1.5vw',
     width: '30%',
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 4,
     [theme.breakpoints.down('xs')]: {
-      width: '40%',
+      width: '50%',
     },
   },
   searchTyp: {
-    marginLeft: '1vw',
+    marginLeft: '1.5vw',
     width: '10%',
     backgroundColor: 'white',
     borderRadius: 20,
     '& div': {
       paddingLeft: 10,
+      // color: '#f50057',
     },
     [theme.breakpoints.down('xs')]: {
-      width: '20%',
+      width: '25%',
     },
   },
   searchBtn: {
-    marginLeft: '1vw',
+    marginLeft: '1.5vw',
     fontSize: '2vh',
     fontWeight: 'bold' as 'bold',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.5vh',
+      width: '25%',
+    },
   },
 });
 

@@ -45,7 +45,11 @@ class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
 
     return (
       <div className={classes.root}>
-        {cardsData.length > 0 ? this.loadCard(cardsData) : 'NO DATA'}
+        {cardsData.length > 0 ? (
+          this.loadCard(cardsData)
+        ) : (
+          <span style={{color: 'white', fontWeight: 'bold'}}>NO DATA</span>
+        )}
       </div>
     );
   }

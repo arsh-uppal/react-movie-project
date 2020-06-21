@@ -55,7 +55,7 @@ class SearchLayout extends React.Component<SearchPanelProps, SearchPanelState> {
       this.state.searchQuery!.length < 3
     ) {
       // if condition to stop too many re-render
-      this.props.setSearchMsg('please intiate a search');
+      this.props.setSearchMsg('Please intiate a search');
     }
   }
 

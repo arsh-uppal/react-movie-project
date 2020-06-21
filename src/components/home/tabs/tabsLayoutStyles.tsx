@@ -6,22 +6,29 @@ const tabsLayoutStyles = (theme: Theme) => ({
   },
   tabsBar: {
     backgroundColor: theme.palette.background.paper,
-    color: 'black',
-    width: '50vw',
+    width: '40vw',
     margin: 'auto',
+    marginTop: '5px',
     alignItems: 'center',
+    color: '#f50057',
+    fontWeight: 'bolder' as 'bolder',
     fontSize: '2vh',
+    overflow: 'hidden',
     [theme.breakpoints.down('sm')]: {
       width: '80%',
     },
     [theme.breakpoints.down('xs')]: {
-      width: '80%',
+      width: '90%',
     },
   },
   tabPanelContainer: {
     height: '100%',
   },
+  tabTitle: {
+    fontWeight: 'bolder' as 'bolder',
+  },
   btnGroupContainer: {
+    overflow: 'auto',
     width: '100%',
     margin: 'auto',
     textAlign: 'center' as 'center',
@@ -53,15 +60,18 @@ const tabsLayoutStyles = (theme: Theme) => ({
     },
   },
   loadingSearch: {
-    width: 210,
-    paddingTop: '8vw',
+    width: '250px',
+    paddingTop: '5vw',
     margin: 'auto',
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: 'bold' as 'bold',
     textAlign: 'center' as 'center',
     [theme.breakpoints.down('xs')]: {
-      paddingTop: '20vw',
+      paddingTop: '15vw',
     },
   },
-  searchImg: {marginTop: 20},
+  searchImg: {marginTop: 40},
 
   paginationContainer: {
     margin: 'auto',
@@ -73,7 +83,10 @@ const tabsLayoutStyles = (theme: Theme) => ({
     textAlign: 'center' as 'center',
     '& ul': {
       '& li:nth-child(n+2):nth-child(-n+3)': {display: 'none'},
-      '& li': {'& button': {backgroundColor: '#f50057'}},
+      '& li': {
+        '& button': {backgroundColor: '#f50057'},
+        '& button:hover': {backgroundColor: '#eb2a6f'},
+      },
     },
   },
   paginationForSearch: {
@@ -81,7 +94,10 @@ const tabsLayoutStyles = (theme: Theme) => ({
     margin: 'auto',
     textAlign: 'center' as 'center',
     '& ul': {
-      '& li': {'& button': {backgroundColor: '#f50057'}},
+      '& li': {
+        '& button': {backgroundColor: '#f50057'},
+        '& button:selected': {backgroundColor: '#f50057'},
+      },
     },
   },
 });

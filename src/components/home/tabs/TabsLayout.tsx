@@ -117,9 +117,17 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
             value={this.props.dataStore.tabNumber}
             onChange={this.props.handleTabChange}
             aria-label="Tabs">
-            <Tab label="MOVIES" {...a11yProps(0)} />
-            <Tab label="SEARCH" {...a11yProps(1)} />
-            <Tab label="TV" {...a11yProps(2)} />
+            <Tab
+              label="MOVIES"
+              {...a11yProps(0)}
+              className={classes.tabTitle}
+            />
+            <Tab
+              label="SEARCH"
+              {...a11yProps(1)}
+              className={classes.tabTitle}
+            />
+            <Tab label="TV" {...a11yProps(2)} className={classes.tabTitle} />
           </Tabs>
         </AppBar>
         <div></div>

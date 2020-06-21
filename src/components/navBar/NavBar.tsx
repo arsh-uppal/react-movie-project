@@ -17,10 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
-      fontSize: '2.8vh',
-      fontWeight: 'normal',
+      fontSize: '2.7vh',
+      fontWeight: 'bolder',
       marginTop: '2vh',
       marginLeft: '20px',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '2.5vh',
+      },
     },
   }),
 );

@@ -3,6 +3,7 @@ import {Theme} from '@material-ui/core/styles';
 const btnGroupStyles = (theme: Theme) => ({
   btnGroup: {
     margin: 'auto',
+    marginTop: '2vh',
     fontSize: '2vh',
     backgroundColor: theme.palette.background.paper,
   },
@@ -11,7 +12,7 @@ const btnGroupStyles = (theme: Theme) => ({
     color: 'white',
     fontWeight: 'bold' as 'bold',
     [theme.breakpoints.down('xs')]: {
-      fontSize: '2.5vh',
+      fontSize: '2.5vw',
       fontWeight: 'bolder' as 'bolder',
     },
     '&:hover': {
@@ -24,7 +25,7 @@ const btnGroupStyles = (theme: Theme) => ({
     fontWeight: 'bold' as 'bold',
     color: '#f50057',
     [theme.breakpoints.down('xs')]: {
-      fontSize: '2.5vh',
+      fontSize: '2.5vw',
       fontWeight: 'bolder' as 'bolder',
     },
   },
