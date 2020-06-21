@@ -16,6 +16,14 @@ import BtnGroup from '../../common/BtnGroup';
 // styles
 import tabsLayoutStyles from './tabsLayoutStyles';
 
+// search image
+/**
+ * Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+ *
+ * The following import may show warning in VS code. However, it works.
+ */
+import searchImg from '../../../images/search.png';
+
 export interface TabsLayoutProps extends WithStyles<typeof tabsLayoutStyles> {
   fetchInfo: (contentFor: string, contentCategory: any) => void;
   handleTabChange: (event: React.ChangeEvent<{}>, newValue: number) => void;
@@ -106,6 +114,17 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
             {this.props.dataStore.isLoading ? (
               <div className={classes.loadingSkel}>
                 <LoadingSkelton />
+              </div>
+            ) : this.props.dataStore.searchMsg.length > 0 &&
+              this.props.dataStore.search.length <= 0 ? (
+              <div className={classes.loadingSearch}>
+                {this.props.dataStore.searchMsg}
+                <img
+                  src={searchImg}
+                  alt="Girl in a jacket"
+                  width="100"
+                  height="100"
+                />
               </div>
             ) : (
               <ResultCards cardsData={this.props.dataStore.search} />

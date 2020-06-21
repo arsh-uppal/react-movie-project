@@ -20,6 +20,8 @@ import resultCardLayoutStyles from './resultCardLayoutStyles';
 // not-found image
 /**
  * Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+ *
+ * The following import may show warning in VS code. However, it works.
  */
 import backupImg from '../../../../images/not-found.png';
 
@@ -41,6 +43,10 @@ class ResultCardLayout extends React.Component<
     this.state = {anchorEl: null};
   }
 
+  // **********************************************//
+  // ************ BEGINING OF  ACTIONS ************//
+  // **********************************************//
+
   handleClickPopOver = (event: React.MouseEvent<HTMLButtonElement>) => {
     this.setState({anchorEl: event.currentTarget});
   };
@@ -48,6 +54,10 @@ class ResultCardLayout extends React.Component<
   handleClosePopOver = () => {
     this.setState({anchorEl: null});
   };
+
+  // **********************************************//
+  // ************** END OF ACTIONS ****************//
+  // **********************************************//
 
   render() {
     const {classes} = this.props;
@@ -63,7 +73,7 @@ class ResultCardLayout extends React.Component<
               alt="movie or tv poster"
               image={poster_path ? IMAGE_URL + poster_path : backupImg}
               title={title}
-              style={{height: 355}}
+              className={classes.media}
             />
           </CardActionArea>
           <CardActions>

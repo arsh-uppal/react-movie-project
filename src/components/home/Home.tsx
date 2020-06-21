@@ -25,6 +25,7 @@ export interface HomeState {
   search: Array<string>;
   snackBarDisplay: boolean;
   tabNumber: number;
+  searchMsg: string;
   errorMsg: string;
 }
 
@@ -51,6 +52,7 @@ class Home extends Component<HomeProps, HomeState> {
       search: [],
       snackBarDisplay: false,
       tabNumber: 0,
+      searchMsg: 'Please enter a search query',
       errorMsg: '',
     };
   }
@@ -119,6 +121,14 @@ class Home extends Component<HomeProps, HomeState> {
     });
   };
 
+  setSearchMsg = (msg: string) => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        searchMsg: msg,
+      };
+    });
+  };
   // **********************************************//
   // ************** END OF ACTIONS ****************//
   // **********************************************//
@@ -131,6 +141,7 @@ class Home extends Component<HomeProps, HomeState> {
           <SearchLayout
             fetchInfo={this.fetchInfo}
             handleTabChange={this.handleTabChange}
+            setSearchMsg={this.setSearchMsg}
           />
         </Grid>
 

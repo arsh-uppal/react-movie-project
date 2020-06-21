@@ -12,6 +12,9 @@ const btnGroupStyles = (theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       fontSize: '1.5vh',
     },
+    '&:hover': {
+      background: 'purple',
+    },
   },
   btn: {
     fontSize: '2vh',

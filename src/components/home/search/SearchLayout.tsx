@@ -22,6 +22,7 @@ export interface SearchPanelProps extends WithStyles<typeof searchPanelStyles> {
     searchQuery: string,
   ) => void;
   handleTabChange: (event: any, newValue: number) => void;
+  setSearchMsg: (msg: string) => void;
 }
 
 export interface SearchPanelState {
@@ -49,6 +50,13 @@ class SearchLayout extends React.Component<SearchPanelProps, SearchPanelState> {
   handleChange(event: React.FormEvent<EventTarget>): void {
     let target = event.target as HTMLInputElement;
     this.setState({[target.name]: target.value});
+    if (
+      this.state.searchQuery!.length >= 0 &&
+      this.state.searchQuery!.length < 3
+    ) {
+      // if condition to stop too many re-render
+      this.props.setSearchMsg('please intiate a search');
+    }
   }
 
   handleSubmit(event: React.FormEvent<EventTarget>): void {
@@ -59,6 +67,7 @@ class SearchLayout extends React.Component<SearchPanelProps, SearchPanelState> {
       'search',
       this.state.searchQuery!,
     );
+    this.props.setSearchMsg('');
   }
 
   // **********************************************//

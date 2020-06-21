@@ -52,6 +52,15 @@ const tabsLayoutStyles = (theme: Theme) => ({
       paddingTop: '20vw',
     },
   },
+  loadingSearch: {
+    width: 210,
+    paddingTop: '8vw',
+    margin: 'auto',
+    textAlign: 'center' as 'center',
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: '20vw',
+    },
+  },
 });
 
 export default tabsLayoutStyles;

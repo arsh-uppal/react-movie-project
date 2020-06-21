@@ -21,6 +21,10 @@ class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
     this.state = {};
   }
 
+  // **********************************************//
+  // ************ BEGINING OF  ACTIONS ************//
+  // **********************************************//
+
   loadCard(cardsData: any) {
     return cardsData.map((cardData: any) => {
       return (
@@ -30,6 +34,10 @@ class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
       );
     });
   }
+
+  // **********************************************//
+  // ************** END OF ACTIONS ****************//
+  // **********************************************//
 
   render() {
     const {classes} = this.props;

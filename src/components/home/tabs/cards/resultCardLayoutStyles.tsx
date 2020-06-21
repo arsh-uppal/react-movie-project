@@ -9,6 +9,12 @@ const resultCardLayoutStyles = (theme: Theme) => ({
       width: 340,
     },
   },
+  media: {
+    height: 355,
+    [theme.breakpoints.down('xs')]: {
+      height: 'auto',
+    },
+  },
   title: {
     width: '100%',
     fontSize: '2vh',
