@@ -55,7 +55,9 @@ export default function NavBar() {
           <a
             href="https://github.com/Singh-Arshdeep"
             target="_blank"
-            style={{color: 'inherit', margin: 0, padding: 0}}>
+            rel="noopener noreferrer"
+            style={{color: 'inherit', margin: 0, padding: 0}}
+            title="Arsh's Github">
             <AccountCircleSharpIcon fontSize="large" />
           </a>
         </Button>

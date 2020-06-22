@@ -58,22 +58,30 @@ export default function Footer() {
     <div className={classes.root}>
       {/* <Typography className={classes.title}>All rights reserved</Typography> */}
       <div className={classes.divLeftStyle}>
-        <img src={movieDBlogo} alt="search icon" width="50" height="50" />
+        <img
+          src={movieDBlogo}
+          alt="movieDB logo"
+          width="50"
+          height="50"
+          title="Powered by The Movie Database project"
+        />
       </div>
       <div className={classes.divRightStyle}>
         <img
           className={classes.divRightItems}
           src={reactlogo}
-          alt="search icon"
+          alt="react logo"
           width="30"
           height="30"
+          title="Built with React JS"
         />
         <img
           className={classes.divRightItems}
           src={tslogo}
-          alt="search icon"
+          alt="search logo"
           width="30"
           height="30"
+          title="Built with TypeScript"
         />
       </div>
     </div>

@@ -24,6 +24,8 @@ const resultCardLayoutStyles = (theme: Theme) => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap' as 'nowrap',
     textOverflow: 'ellipsis',
+    color: '#f50057',
+    fontWeight: 'bolder' as 'bolder',
   },
 });
 
