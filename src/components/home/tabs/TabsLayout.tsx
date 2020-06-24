@@ -7,7 +7,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import {withStyles, WithStyles} from '@material-ui/core';
-import Pagination from '@material-ui/lab/Pagination';
 
 // componenets
 import LoadingSkelton from '../../common/LoadingSkelton';
@@ -78,32 +77,6 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
     }
   };
 
-  /**
-   * Could not change the default on-change signature for pagination, that is why
-   * had to make different functions!
-   */
-  handleMoviesPageChange = (event: object, page: number) => {
-    this.props.fetchInfo(
-      this.state.btnSelectedMovies,
-      'movies',
-      undefined,
-      page,
-    );
-  };
-
-  handleTvPageChange = (event: object, page: number) => {
-    this.props.fetchInfo(this.state.btnSelectedTv, 'tv', undefined, page);
-  };
-
-  handleSearchPageChange = (event: object, page: number) => {
-    this.props.fetchInfo(
-      this.props.dataStore.searchFilter,
-      'search',
-      this.props.dataStore.searchQuery,
-      page,
-    );
-  };
-
   // **********************************************//
   // ************** END OF ACTIONS ****************//
   // **********************************************//
@@ -148,21 +121,13 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 <LoadingSkelton />
               </div>
             ) : (
-              <>
-                <ResultCards cardsData={this.props.dataStore.movies} />
-                <div className={classes.paginationContainer}>
-                  <Pagination
-                    variant="outlined"
-                    count={this.props.dataStore.moviesPageCount}
-                    color="primary"
-                    onChange={this.handleMoviesPageChange}
-                    className={classes.pagination}
-                    boundaryCount={0}
-                    siblingCount={0}
-                    size="large"
-                  />
-                </div>
-              </>
+              <ResultCards
+                cardsData={this.props.dataStore.movies}
+                contentCategory="movies"
+                btnSelected={this.state.btnSelectedMovies}
+                fetchInfo={this.props.fetchInfo}
+                totalPages={this.props.dataStore.moviesPageCount}
+              />
             )}
           </TabPanel>
 
@@ -186,18 +151,13 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 />
               </div>
             ) : (
-              <>
-                <ResultCards cardsData={this.props.dataStore.search} />
-                <div className={classes.paginationContainer}>
-                  <Pagination
-                    variant="outlined"
-                    count={this.props.dataStore.searchPageCount}
-                    color="primary"
-                    onChange={this.handleSearchPageChange}
-                    className={classes.paginationForSearch}
-                  />
-                </div>
-              </>
+              <ResultCards
+                cardsData={this.props.dataStore.search}
+                contentCategory="search"
+                btnSelected={this.props.dataStore.searchFilter}
+                fetchInfo={this.props.fetchInfo}
+                totalPages={this.props.dataStore.searchPageCount}
+              />
             )}
           </TabPanel>
 
@@ -222,21 +182,13 @@ class TabsLayout extends React.Component<TabsLayoutProps, TabsLayoutState> {
                 <LoadingSkelton />
               </div>
             ) : (
-              <>
-                <ResultCards cardsData={this.props.dataStore.tv} />
-                <div className={classes.paginationContainer}>
-                  <Pagination
-                    variant="outlined"
-                    count={this.props.dataStore.tvPageCount}
-                    color="primary"
-                    onChange={this.handleTvPageChange}
-                    className={classes.pagination}
-                    boundaryCount={0}
-                    siblingCount={0}
-                    size="large"
-                  />
-                </div>
-              </>
+              <ResultCards
+                cardsData={this.props.dataStore.tv}
+                contentCategory="tv"
+                btnSelected={this.state.btnSelectedTv}
+                fetchInfo={this.props.fetchInfo}
+                totalPages={this.props.dataStore.tvPageCount}
+              />
             )}
           </TabPanel>
         </div>

@@ -10,6 +10,23 @@ const resultCardsStyles = (theme: Theme) => ({
       paddingTop: '4vh',
     },
   },
+  paginationContainer: {
+    margin: 'auto',
+    display: 'table',
+    paddingTop: '5vh',
+  },
+  pagination: {
+    width: '100%%',
+    margin: 'auto',
+    textAlign: 'center' as 'center',
+    '& ul': {
+      '& li:nth-child(n+2):nth-child(-n+3)': {display: 'none'},
+      '& li': {
+        '& button': {backgroundColor: '#f50057'},
+        '& button:hover': {backgroundColor: '#eb2a6f'},
+      },
+    },
+  },
 });
 
 export default resultCardsStyles;

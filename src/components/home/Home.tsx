@@ -107,8 +107,10 @@ class Home extends Component<HomeProps, HomeState> {
       ContentCategories
     >(contentCategory)(contentCategories);
 
-    //temp fix for pagination on search page
-    if (contentCategory === 'search') {
+    // handles pagination on search page
+    // whenever a user will click on the next page in the case of search
+    // this already stored state parameters will be used
+    if (contentCategory === 'search' && searchQuery.length > 0) {
       this.setState((prevState) => {
         return {
           ...prevState,
@@ -117,7 +119,11 @@ class Home extends Component<HomeProps, HomeState> {
         };
       });
     }
-    getData(_contentCategory + contentFor, searchQuery, pageNum).then(
+
+    let _searchQuery =
+      searchQuery.length > 0 ? searchQuery : this.state.searchQuery;
+
+    getData(_contentCategory + contentFor, _searchQuery, pageNum).then(
       (data) => {
         this.setState((prevState) => {
           let pageCountFor = contentCategory + 'PageCount';
