@@ -49,7 +49,7 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Typography component={'span'} className={classes.title}>
-          Movies App
+          Movies App (Powered by TMDB)
         </Typography>
         <Button color="inherit" className={classes.btn}>
           <a

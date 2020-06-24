@@ -88,18 +88,26 @@ class Home extends Component<HomeProps, HomeState> {
   // ************ BEGINING OF  ACTIONS ************//
   // **********************************************//
 
+  /**
+   * This function handles all the api calls
+   * @param contentFor - {now_playing || upcoming || popular || etc}
+   * @param contentCategory - {movies || tv || search}
+   * @param searchQuery - this is an optional parameter
+   * @param pageNum - this is an optional parameter
+   */
   fetchInfo = (
     contentFor: string,
     contentCategory: any,
     searchQuery: string = '',
     pageNum: number = 1,
   ): void => {
+    // to add values in the state object using dynamic keys [TS specific]
     const _contentCategory = getKeyValue<
       keyof ContentCategories,
       ContentCategories
     >(contentCategory)(contentCategories);
 
-    //fix for pagination on search page
+    //temp fix for pagination on search page
     if (contentCategory === 'search') {
       this.setState((prevState) => {
         return {
@@ -134,7 +142,7 @@ class Home extends Component<HomeProps, HomeState> {
     );
   };
 
-  //handleTabChange
+  // handleTabChange
   handleTabChange = (event: any, newValue: number) => {
     this.setState((prevState) => {
       return {
@@ -144,6 +152,7 @@ class Home extends Component<HomeProps, HomeState> {
     });
   };
 
+  // handle search messages
   setSearchMsg = (msg: string) => {
     this.setState((prevState) => {
       return {
@@ -177,6 +186,7 @@ class Home extends Component<HomeProps, HomeState> {
           />
         </Grid>
 
+        {/* This Snackbar handle all the errors */}
         <Snackbar
           open={this.state.snackBarDisplay}
           autoHideDuration={4000}

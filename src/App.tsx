@@ -16,6 +16,7 @@ import NavBar from './components/navBar/NavBar';
 import Home from './components/home/Home';
 import Footer from './components/footer/Footer';
 
+// styles
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     navBar: {
