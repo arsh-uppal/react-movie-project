@@ -109,7 +109,7 @@ class Home extends Component<HomeProps, HomeState> {
 
     // handles pagination on search page
     // whenever a user will click on the next page in the case of search
-    // this already stored state parameters will be used
+    // this already stored state parameters could be used
     if (contentCategory === 'search' && searchQuery.length > 0) {
       this.setState((prevState) => {
         return {

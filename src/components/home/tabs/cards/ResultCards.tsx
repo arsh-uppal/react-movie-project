@@ -23,12 +23,18 @@ export interface ResultCardsProps extends WithStyles<typeof resultCardsStyles> {
   totalPages: number;
 }
 
-export interface ResultCardsState {}
+export interface ResultCardsState {
+  currentPage: number;
+  btnSelected: string;
+}
 
 class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
   constructor(props: ResultCardsProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentPage: 1,
+      btnSelected: this.props.btnSelected,
+    };
   }
 
   // **********************************************//
@@ -46,14 +52,29 @@ class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
   }
 
   handlePageChange = (event: object, page: number) => {
-    console.log(page);
     this.props.fetchInfo(
       this.props.btnSelected,
       this.props.contentCategory,
       undefined,
       page,
     );
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        currentPage: page,
+      };
+    });
   };
+
+  //handles pagination chnaged between a button group
+  componentDidUpdate() {
+    if (this.state.btnSelected !== this.props.btnSelected) {
+      this.setState({
+        currentPage: 1,
+        btnSelected: this.props.btnSelected,
+      });
+    }
+  }
 
   // **********************************************//
   // ************** END OF ACTIONS ****************//
@@ -74,12 +95,12 @@ class ResultCards extends React.Component<ResultCardsProps, ResultCardsState> {
                   <Pagination
                     variant="outlined"
                     count={this.props.totalPages}
-                    color="primary"
+                    color="secondary"
                     className={classes.pagination}
                     onChange={this.handlePageChange}
-                    boundaryCount={0}
-                    siblingCount={0}
                     size="large"
+                    defaultPage={1}
+                    page={this.state.currentPage}
                   />
                 </div>
               </div>
