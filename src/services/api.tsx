@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {API_KEY, BASE_URL} from '../config/apiConfig';
+import {BASE_URL} from '../config/apiConfig';
 
 export const getData = async (
   contentFor: string,
@@ -8,7 +8,7 @@ export const getData = async (
   pageNum: number = 1,
 ) => {
   let _param: any = {
-    api_key: API_KEY,
+    api_key: process.env.REACT_APP_API_KEY,
     page: pageNum,
   };
 
